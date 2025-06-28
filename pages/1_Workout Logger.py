@@ -5,7 +5,7 @@ import os
 st.title("Workout Logger")
 
 # File to store PR data
-PR_FILE = "pr_data.csv"
+PR_FILE = "data/pr_data.csv"
 
 # Initialize session state
 if "exercises" not in st.session_state:

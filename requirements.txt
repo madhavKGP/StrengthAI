@@ -1,3 +1,9 @@
 numpy
 pandas
 streamlit
+langchain-community 
+pypdf
+langchain-huggingface
+sentence-transformers
+ipywidgets
+faiss-cpu
