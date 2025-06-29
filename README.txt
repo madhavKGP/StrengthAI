@@ -1,1 +1,2 @@
-just run streamlit run Home.py
+pip install -r requiremets.txt
+streamlit run Home.py
