@@ -5,7 +5,7 @@ import os
 st.title("Workout Logger")
 
 # File to store PR data
-PR_FILE = "data/pr_data.csv"
+PR_FILE = "pages/data/pr_data.csv"
 
 # Initialize session state
 if "exercises" not in st.session_state:
@@ -26,9 +26,13 @@ def calculate_1rm(weight, reps, rpe):
 def update_pr_file(log_data):
  
     if os.path.exists(PR_FILE):
-        pr_df = pd.read_csv(PR_FILE)
+        try:
+            pr_df = pd.read_csv(PR_FILE)
+        except pd.errors.EmptyDataError:
+            pr_df = pd.DataFrame(columns=["Exercise", "Best 1RM", "Max Volume", "Max RPE", "Max Weight"])
     else:
         pr_df = pd.DataFrame(columns=["Exercise", "Best 1RM", "Max Volume", "Max RPE", "Max Weight"])
+
 
     for exercise, sets in log_data.items():
         for s in sets:

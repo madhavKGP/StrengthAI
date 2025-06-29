@@ -7,3 +7,4 @@ langchain-huggingface
 sentence-transformers
 ipywidgets
 faiss-cpu
+langchain_groq
