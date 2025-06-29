@@ -7,7 +7,6 @@ from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
-from sentence_transformers import SentenceTransformer
 
 # Load environment variables
 load_dotenv()
