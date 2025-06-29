@@ -54,9 +54,9 @@ if st.button("🛠️ Generate Plan") or user_query:
         template="""
                 You are a powerlifting coach named Milo. Based on the context below, respond to the user's specific query.
                 Write in first person with the user.
-                Include warm-ups, working sets, reps, weights (based on their PRs), and target RPE.
+                Include warm-ups, working sets, reps, weights  (based on their PRs), and target RPE.
                 Account for any injuries mentioned. Return the plan in markdown format using code blocks (\`\`\`) for tables so that it renders properly in Streamlit.
-
+                
                 Context:
                 {context}
                 """

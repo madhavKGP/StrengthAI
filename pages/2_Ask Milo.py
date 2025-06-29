@@ -7,6 +7,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
+from sentence_transformers import SentenceTransformer
 
 # Load environment variables
 load_dotenv()
@@ -27,7 +28,8 @@ if "initial_query" not in st.session_state:
     st.session_state.initial_query = ""
 
 # Load vectorstore and embeddings
-embeddings = HuggingFaceEmbeddings(model_name="./models/all-MiniLM-L6-v2")
+embeddings = HuggingFaceEmbeddings(model_name="./models/all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
+
 vectorstore = FAISS.load_local("pages/data/milo_index", embeddings, allow_dangerous_deserialization=True)
 retriever = vectorstore.as_retriever(search_type="similarity", k=5)
 
