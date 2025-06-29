@@ -4,7 +4,7 @@ streamlit
 langchain-community 
 pypdf
 langchain-huggingface
-# sentence-transformers
 ipywidgets
 faiss-cpu
 langchain_groq
+sentence-transformers
