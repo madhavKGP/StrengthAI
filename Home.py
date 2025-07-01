@@ -25,7 +25,7 @@ sessions = localS.getItem(SESSIONS_KEY)
 if not sessions or not isinstance(sessions, list):
     sessions = []
 
-# Compute personal bests
+# Compute personal bests records
 best_records = {}
 for session in sessions:
     wt_type = session.get("weight_type", "kg")

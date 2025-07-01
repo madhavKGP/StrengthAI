@@ -74,7 +74,7 @@ if not st.session_state.awaiting_test_input:
             st.session_state.initial_query = query
             st.session_state.awaiting_test_input = True
 
-# Step 2: Show tests and ask user to confirm
+# Step 2: Show tests and ask user to confirm the step
 if st.session_state.awaiting_test_input:
     st.subheader("Step 2: Confirm test results")
     st.markdown("**Milo recommends the following diagnostic tests:**")

@@ -34,7 +34,7 @@ plan_history = localS.getItem('plan_history')
 if not plan_history or not isinstance(plan_history, list):
     plan_history = []
 
-# Tabs for different histories
+# Tabs for different histories of user
 st.header('History')
 tabs = st.tabs(["Workout Sessions", "Injury History", "Plan History"])
 

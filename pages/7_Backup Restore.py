@@ -30,7 +30,7 @@ def get_all_user_data(localS):
     return data
 
 def merge_all_user_data(localS, imported):
-    # Merge sessions
+    # Merge all the sessions
     sessions = localS.getItem('workout_sessions')
     if not sessions or not isinstance(sessions, list):
         sessions = []
