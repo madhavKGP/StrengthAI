@@ -18,7 +18,7 @@ StrengthAI is an AI-powered, Streamlit-based app for personalized strength train
 
 1. **Clone the repository:**
    ```sh
-   git clone <repo-url>
+   git clone <https://github.com/madhavKGP/StrengthAi/tree/main>
    cd StrengthAi
    ```
 
