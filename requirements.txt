@@ -8,3 +8,4 @@ ipywidgets
 faiss-cpu
 langchain_groq
 sentence-transformers
+streamlit-local-storage

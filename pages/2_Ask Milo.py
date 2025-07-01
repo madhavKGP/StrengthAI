@@ -7,6 +7,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
+from streamlit_local_storage import LocalStorage
 
 # Load environment variables
 load_dotenv()
@@ -14,7 +15,6 @@ groq_api_key = os.getenv("GROQ_API_KEY")
 
 # Page title
 st.title("🧠 Injury Assistant (Ask Milo)")
-
 
 # Session state
 if "chat_history" not in st.session_state:
@@ -26,8 +26,11 @@ if "awaiting_test_input" not in st.session_state:
 if "initial_query" not in st.session_state:
     st.session_state.initial_query = ""
 
+# LocalStorage instance (move to top, like in 3_Planner.py)
+localS = LocalStorage()
+
 # Load vectorstore and embeddings
-embeddings = HuggingFaceEmbeddings(model_name="./models/all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
+embeddings = HuggingFaceEmbeddings(model_name="./models", model_kwargs={"device": "cpu"})
 
 vectorstore = FAISS.load_local("pages/data/milo_index", embeddings, allow_dangerous_deserialization=True)
 retriever = vectorstore.as_retriever(search_type="similarity", k=5)
@@ -109,19 +112,21 @@ if st.session_state.awaiting_test_input:
 
             st.subheader("🛠️ Corrective Plan")
             st.markdown(response_2)
-
-            # Save full conversation
             st.session_state.chat_history.append((combined_input, response_2))
 
-            # Save latest injury
-            latest_injury = {
-                "query": st.session_state.initial_query,
-                "tests": st.session_state.diagnostic_tests,
-                "test_results": user_followup,
-                "response": response_2
-            }
-            with open("pages/data/latest_injury.json", "w") as f:
-                json.dump(latest_injury, f)
-
-            # Reset for next session
-            st.session_state.awaiting_test_input = False
+            # Show a button to reset awaiting_test_input and save to localStorage
+            if st.button('Done - Reset for next session'):
+                latest_injury = {
+                    "query": st.session_state.initial_query,
+                    "tests": st.session_state.diagnostic_tests,
+                    "test_results": user_followup,
+                    "response": response_2
+                }
+                plan_history = localS.getItem('injury_history')
+                # # if not plan_history or not isinstance(plan_history, list):
+                # #     plan_history = []
+                # plan_history.append(latest_injury)
+                localS.setItem('injury_history', plan_history)
+                localS.setItem('latest_injury', latest_injury)
+                st.session_state.awaiting_test_input = False
+                st.rerun()
